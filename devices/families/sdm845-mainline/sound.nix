@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nixpkgs.overlays = [
@@ -11,8 +11,8 @@
             name = "sdm845-alsa-ucm";
             owner = "sdm845-mainline";
             repo = "alsa-ucm-conf";
-            rev = "621c71fd5f5742c60d38766ebb2d1bd3b863a2a4"; # master
-            sha256 = "sha256-CgAPg0UUAJUE1gD59l2GNDx3h9crAato6O/dDJpRwiY=";
+            rev = "34a4ee28abe70a5719e4a895333d0796c13ecd16"; # master
+            sha256 = "sha256-9RZ6o5w60DM2CuB9lSEV6B5CAHfR+Y2yU8TppXk7KZg=";
           };
         } ''
           mkdir -p $out/share/
