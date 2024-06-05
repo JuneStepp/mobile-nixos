@@ -67,6 +67,9 @@ in
 
     lk2ndMsm8953 = callPackage ./lk2nd/msm8953.nix {};
 
+    hexagonrpcd = callPackage ./hexagonrpcd { };
+    libssc = callPackage ./libssc { };
+
     #
     # Hacks
     # -----
@@ -89,6 +92,11 @@ in
       });
     }) # See all-packages.nix for more about this messy composition :/
     // { inherit (self) xlibsWrapper; };
+
+    # Wait for https://gitlab.freedesktop.org/hadess/iio-sensor-proxy/-/merge_requests/381
+    iio-sensor-proxy = callPackage ./iio-sensor-proxy-libssc {
+      inherit (super) iio-sensor-proxy;
+    };
 
     #
     # Fixes to upstream

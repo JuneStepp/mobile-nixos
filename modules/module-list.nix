@@ -24,6 +24,7 @@
   ./hardware-screen.nix
   ./hardware-soc.nix
   ./hardware.nix
+  ./hexagonrpcd.nix
   ./initrd-base.nix
   ./initrd-boot-gui.nix
   ./initrd-fbterm.nix
