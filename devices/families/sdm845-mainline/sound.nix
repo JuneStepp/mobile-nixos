@@ -27,4 +27,40 @@
   environment.systemPackages = [
     pkgs.sdm845-alsa-ucm
   ];
+
+  # Pipewire workaround
+  # https://gitlab.com/postmarketOS/pmaports/-/blob/master/device/community/soc-qcom-sdm845/51-qcom-sdm845.lua
+  services.pipewire.wireplumber.extraConfig."51-qcom-sdm845-workaround" = {
+    "monitor.alsa.rules" = [
+      {
+        # PipeWire's S24LE default audio format is broken in the kernel driver
+        matches = [
+          { "node.name" = "~alsa_output\\..*\\.HiFi.*__sink"; }
+          { "node.name" = "~alsa_input\\..*\\.HiFi.*__source"; }
+        ];
+        actions = {
+          update-props = {
+            "audio.format" = "S16LE";
+            "audio.rate" = 48000;
+            "api.alsa.period-size" = 4096;
+            "api.alsa.period-num" = 6;
+            "api.alsa.headroom" = 512;
+          };
+        };
+      }
+      {
+        # Disable suspend for Voice Call devices
+        matches = [
+          { "node.name" = "~alsa_output\\..*\\.Voice_Call.*__sink"; }
+          { "node.name" = "~alsa_input\\..*\\.Voice_Call.*__source"; }
+        ];
+        actions = {
+          update-props = {
+            "audio.format" = "S16LE";
+            "session.suspend-timeout-seconds" = 0;
+          };
+        };
+      }
+    ];
+  };
 }
