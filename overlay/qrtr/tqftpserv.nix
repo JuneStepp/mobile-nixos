@@ -1,18 +1,16 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, substituteAll
 , qrtr
 , zstd
 , meson
 , ninja
 , pkg-config
-, firmwareBase ? "/run/current-system/sw/share/uncompressed-firmware"
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "tqftpserv";
-  version = "1.1";
+  version = "533779cb8a1843581d5422a7f0aae1a35e6ab956";
 
   nativeBuildInputs = [ meson ninja pkg-config ];
   buildInputs = [ qrtr zstd ];
@@ -20,16 +18,9 @@ stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "linux-msm";
     repo = "tqftpserv";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-Djw2rx1FXYYPXs6Htq7jWcgeXFvfCUoeidKtYUvTqZU=";
+    rev = finalAttrs.version;
+    hash = "sha256-KKjEwl6qviDFqhDBU39ug3QBmRtwztHyBWgzvC7GI2w=";
   };
-
-  patches = [
-    (substituteAll {
-      src = ./tqftpserv-firmware-path.diff ;
-      firmware_base = firmwareBase;
-    })
-  ];
 
   meta = with lib; {
     description = "Trivial File Transfer Protocol server over AF_QIPCRTR";

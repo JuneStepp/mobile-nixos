@@ -68,7 +68,7 @@ in
         User = "fastrpc";
         Group = "fastrpc";
       };
-      wantedBy = mkIf (cfg.services.sdsp.enable) ["multi-user.target"];
+      # wantedBy = mkIf (cfg.services.sdsp.enable) ["multi-user.target"];
     };
   };
 }

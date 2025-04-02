@@ -26,7 +26,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = [ meson ninja ];
 
-  mesonFlags = [ "-Dqrtr-ns=enabled" "-Dsystemd-service=disabled" ];
+  mesonFlags = [ "-Dsystemd-service=disabled" ];
 
   meta = with lib; {
     description = "QMI IDL compiler";
