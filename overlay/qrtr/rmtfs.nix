@@ -19,6 +19,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Qualcomm Remote Filesystem Service";
     homepage = "https://github.com/linux-msm/rmtfs";
     license = licenses.bsd3;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })

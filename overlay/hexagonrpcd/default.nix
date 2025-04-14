@@ -31,6 +31,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Server for FastRPC remote procedure calls from Qualcomm DSPs";
     homepage = "https://gitlab.com/flamingradian/sensh";
     license = licenses.gpl3Plus;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })

@@ -17,6 +17,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "QMI IDL compiler";
     homepage = "https://github.com/linux-msm/qmic";
     license = licenses.bsd3;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })

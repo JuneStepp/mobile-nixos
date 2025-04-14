@@ -36,6 +36,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Library for exposing Qualcomm Sensor Core sensors to Linux";
     homepage = "https://libssc.dylanvanassche.be";
     license = licenses.gpl3Plus;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })

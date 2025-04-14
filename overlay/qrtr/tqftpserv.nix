@@ -26,6 +26,6 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Trivial File Transfer Protocol server over AF_QIPCRTR";
     homepage = "https://github.com/linux-msm/tqftpserv";
     license = licenses.bsd3;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })

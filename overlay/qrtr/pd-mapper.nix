@@ -23,6 +23,6 @@ stdenv.mkDerivation (finalAttrs:{
     description = "Qualcomm PD mapper";
     homepage = "https://github.com/linux-msm/pd-mapper";
     license = licenses.bsd3;
-    platforms = platforms.aarch64;
+    platforms = platforms.linux;
   };
 })
