@@ -1,6 +1,6 @@
 {
   stdenv,
-  fetchgit,
+  fetchFromGitea,
   lib,
   meson,
   ninja,
@@ -8,15 +8,20 @@
   libqmi,
   glib,
   protobufc,
+  python3,
+  protobuf,
+  qrtr,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "libssc";
-  version = "0.1.5";
-  src = fetchgit {
-    url = "https://codeberg.org/DylanVanAssche/libssc.git";
-    rev = finalAttrs.version;
-    hash = "sha256-XcVNmUVIoA5JEZmX0FoQvTSxWuDcK3Vi8yq/kt9Zddo=";
+  version = "0.2.2";
+  src = fetchFromGitea {
+    domain = "codeberg.org";
+    owner = "DylanVanAssche";
+    repo = "libssc";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-vc3phLAURKXAVD/o4uiGkBtJ3wsbLEfkwygMltEhqug=";
   };
 
   nativeBuildInputs = [
@@ -24,6 +29,10 @@ stdenv.mkDerivation (finalAttrs: {
     ninja
     pkg-config
     protobufc
+    # Tests
+    protobuf
+    python3.pkgs.pygobject3
+    qrtr
   ];
 
   buildInputs = [
