@@ -1,25 +1,20 @@
 {
   stdenv,
   lib,
-  fetchFromGitLab,
+  fetchFromGitHub,
   meson,
   ninja,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "hexagonrpcd";
-  version = "0.3.0";
+  version = "0.3.2";
 
-  src = fetchFromGitLab {
-    owner = "flamingradian";
-    repo = "sensh";
+  src = fetchFromGitHub {
+    owner = "linux-msm";
+    repo = "hexagonrpc";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-BwA3+aKO5CJYmSYGybLGu64zOyM1MZmnVf3zIlSnlO0=";
+    hash = "sha256-v8BRorYXvRCDE5BmXx2QFWp4H+TMhGf6/te4vav5Rmc=";
   };
-
-  preConfigure = ''
-    cd fastrpc
-  '';
 
   nativeBuildInputs = [
     meson
@@ -29,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
   meta = with lib; {
     mainProgram = "hexagonrpcd";
     description = "Server for FastRPC remote procedure calls from Qualcomm DSPs";
-    homepage = "https://gitlab.com/flamingradian/sensh";
+    homepage = "https://github.com/linux-msm/hexagonrpc";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
   };
