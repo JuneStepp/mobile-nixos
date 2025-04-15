@@ -15,6 +15,11 @@ stdenv.mkDerivation (finalAttrs: {
 
   installFlags = [ "prefix=$(out)" ];
 
+  postInstall = ''
+    # https://gitlab.postmarketos.org/postmarketOS/pmaports/-/blob/master/modem/rmtfs/udev.rules
+    install -Dm644 ${./rmtfs-udev.rules} $out/etc/udev/rules.d/65-${finalAttrs.pname}.rules
+  '';
+
   meta = with lib; {
     description = "Qualcomm Remote Filesystem Service";
     homepage = "https://github.com/linux-msm/rmtfs";
