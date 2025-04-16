@@ -98,6 +98,11 @@ in
       inherit (super) iio-sensor-proxy;
     };
 
+    libcamera = callPackage ./libcamera { inherit (super) libcamera; };
+    libcamera-qcam = (callPackage ./libcamera { inherit (super) libcamera; }).overrideAttrs {
+      withQcam = true;
+    };
+
     #
     # Fixes to upstream
     # -----------------
