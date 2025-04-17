@@ -32,43 +32,53 @@ in
     '';
 
     systemd.services.hexagonrpcd-adsp-rootpd = {
-      description = "Hexagonrpcd ADSP RootPD";
+      description = "Daemon to support Qualcomm Hexagon ADSP virtual filesystem for RootPD";
       requires = ["dev-fastrpc\\x2dadsp.device"];
       after = ["dev-fastrpc\\x2dadsp.device"];
       script = ''
-        "${getExe pkgs.hexagonrpcd}" -R "${cfg.root}" -d adsp -f /dev/fastrpc-adsp
+        "${getExe pkgs.hexagonrpcd}" -f /dev/fastrpc-adsp -d adsp -R "${cfg.root}"
       '';
       serviceConfig = {
+        Restart = "always";
+        RestartSec = "3";
         User = "fastrpc";
         Group = "fastrpc";
       };
       wantedBy = mkIf (cfg.services.adsp-rootpd.enable) ["multi-user.target"];
     };
     systemd.services.hexagonrpcd-adsp-sensorspd = {
-      description = "Hexagonrpcd ADSP SensorPD";
+      description = "Daemon to support Qualcomm Hexagon ADSP virtual filesystem for SensorPD";
       requires = ["dev-fastrpc\\x2dadsp.device"];
       after = ["dev-fastrpc\\x2dadsp.device"];
       script = ''
-        "${getExe pkgs.hexagonrpcd}" -R "${cfg.root}" -d adsp -f /dev/fastrpc-adsp -s
+        "${getExe pkgs.hexagonrpcd}" -f /dev/fastrpc-adsp -d adsp -s -R "${cfg.root}"
       '';
+      unitConfig = {
+        # This service shouldn't be run on devices with an SDSP
+        ConditionPathExists = ["!/dev/fastrpc-sdsp"];
+      };
       serviceConfig = {
+        Restart = "always";
+        RestartSec = "3";
         User = "fastrpc";
         Group = "fastrpc";
       };
       wantedBy = mkIf (cfg.services.adsp-sensorspd.enable) ["multi-user.target"];
     };
     systemd.services.hexagonrpcd-sdsp = {
-      description = "Hexagonrpcd SDSP";
+      description = "Daemon to support Qualcomm Hexagon SDSP virtual filesystem";
       requires = ["dev-fastrpc\\x2dsdsp.device"];
       after = ["dev-fastrpc\\x2dsdsp.device"];
       script = ''
-        "${getExe pkgs.hexagonrpcd}" -R "${cfg.root}" -d sdsp -f /dev/fastrpc-sdsp -s
+        "${getExe pkgs.hexagonrpcd}" -f /dev/fastrpc-sdsp -d sdsp -s -R "${cfg.root}"
       '';
       serviceConfig = {
+        Restart = "always";
+        RestartSec = "3";
         User = "fastrpc";
         Group = "fastrpc";
       };
-      # wantedBy = mkIf (cfg.services.sdsp.enable) ["multi-user.target"];
+      wantedBy = mkIf (cfg.services.sdsp.enable) ["multi-user.target"];
     };
   };
 }

@@ -36,10 +36,9 @@ in {
     systemd.services = {
       rmtfs = {
         wantedBy = ["multi-user.target"];
-        requiredBy = ["msm-modem-uim-selection.service"];
         serviceConfig = {
           # https://github.com/andersson/rmtfs/blob/7a5ae7e0a57be3e09e0256b51b9075ee6b860322/rmtfs.c#L507-L541
-          ExecStart = "${pkgs.rmtfs}/bin/rmtfs -s -r -P";
+          ExecStart = "${pkgs.rmtfs}/bin/rmtfs -r -P -s";
           Restart = "always";
           RestartSec = "1";
         };
@@ -55,7 +54,6 @@ in {
         };
       };
       msm-modem-uim-selection = {
-        enable = true;
         before = ["ModemManager.service"];
         after = ["rmtfs.service"];
         requires = ["rmtfs.service"];
