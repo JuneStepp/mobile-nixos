@@ -7,8 +7,8 @@
     owner = "postmarketOS";
     repo = "pmaports";
     sparseCheckout = ["temp/libcamera"];
-    rev = "9f93a01375a133d3ee290486bdf0b5558cc5a1a3";
-    hash = "sha256-J84qQijuhjeCoMIfvftj2xzfDUn2IEKtM5mQyXsxw8I=";
+    rev = "49d5416123be27e611045da6e5c99f81eeca306f";
+    hash = "sha256-ECMHCudyf1ql5uIE7h/aRk5kFhhuXCYb+FuoOd6FQ30=";
   };
   # From https://gitlab.postmarketos.org/postmarketOS/pmaports/-/blob/master/temp/libcamera/APKBUILD
   patchNames = [
@@ -24,7 +24,6 @@
     "0010-ipa-simple-Add-tuning-file-for-hi846.patch"
     "0011-ipa-simple-Add-tuning-file-for-IMX371.patch"
     "0012-ipa-simple-Add-tuning-file-for-IMX376.patch"
-    "0013-libcamera-software_isp-Work-around-bug-259.patch"
   ];
 in
   libcamera.overrideAttrs (finalAttrs: prevAttrs: {
